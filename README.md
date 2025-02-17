@@ -1,6 +1,6 @@
 # 🛒 Electro Shop North Rizkon  
 
-![Electro Shop North Rizkon](./assets/banner.png)  
+![Electro Shop North Rizkon](electro-shop-nr\public\northImg.webp./assets/banner.png)  
 
 **Electro Shop North Rizkon** es una tienda en línea moderna y eficiente, diseñada para facilitar la compra y venta de productos electrónicos. Con un diseño intuitivo y funcionalidades avanzadas, los usuarios pueden explorar una amplia variedad de productos, filtrar por categorías y colores, y realizar compras de manera rápida y segura.  
 
