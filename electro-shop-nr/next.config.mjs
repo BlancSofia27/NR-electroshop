@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    images: {
+      domains: ['humjokilfuelljbcfngl.supabase.co'], // Agrega el dominio de Supabase aquí
+    },
+  };
+  
+  export default nextConfig;
+  
