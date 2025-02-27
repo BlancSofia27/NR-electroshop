@@ -22,8 +22,54 @@
 }
 
 body {
+  @apply font-sans text-[12px] leading-[16px] tracking-normal;
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Helvetica Neue', sans-serif;
-
 }
+
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+  display: flex;
+  min-width: 200%;
+}
+
+/* Estilos personalizados para el contenedor de las imágenes arrastrables */
+.react-sortablejs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  cursor: grab;
+  user-select: none;
+}
+
+.react-sortablejs .sortable-item {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.react-sortablejs .sortable-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+

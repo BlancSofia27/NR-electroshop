@@ -9,10 +9,21 @@ const TABLE_NAME = "products";
 const BUCKET_NAME = "products-images";
 
 // Obtener todos los productos
-export const getProducts = async () => {
+export const getProducts = async (category = null, sortBy = "price") => {
   try {
-    const { data, error } = await supabase.from(TABLE_NAME).select("*");
+    let query = supabase.from(TABLE_NAME).select("*");
+
+    if (category) {
+      query = query.eq("category", category); // Filtrar por categoría si se proporciona
+    }
+
+    if (sortBy) {
+      query = query.order(sortBy, { ascending: true }); // Ordenar según el criterio
+    }
+
+    const { data, error } = await query;
     if (error) throw error;
+
     return data;
   } catch (error) {
     console.error("Error al obtener productos:", error);
@@ -20,11 +31,13 @@ export const getProducts = async () => {
   }
 };
 
+
 // Obtener producto por ID
 export const getProductById = async (id) => {
   try {
     const { data, error } = await supabase.from(TABLE_NAME).select("*").eq("id", id).single();
     if (error) throw error;
+    
     return data;
   } catch (error) {
     console.error("Error al obtener el producto:", error);
@@ -65,13 +78,15 @@ export const createProduct = async (product, files) => {
       name: product.name,
       description: product.description,
       price: product.price,
+      old_price: product.old_price ? product.old_price : null, 
+      free_shipping: product.free_shipping,
       stock: product.stock,
       category: product.category,
       images: imageUrls, // Guardar las URLs de las imágenes
     }]);
 
     if (insertError) throw insertError;
-
+    SweetAlert("Éxito", "Producto agregado correctamente", "success");
     return newProduct;
   } catch (error) {
     console.error("Error en createProduct:", error);

@@ -1,6 +1,6 @@
 // AdminPage.js
 
-import Sidebar from "@/components/Sidebar"; // El componente Sidebar que contiene las opciones
+import Sidebar from "../../components/Sidebar"; // El componente Sidebar que contiene las opciones
 
 const AdminPage = () => {
   return (
