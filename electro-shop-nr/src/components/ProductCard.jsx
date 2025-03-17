@@ -24,10 +24,10 @@ const ProductCard = ({ product }) => {
     maximumFractionDigits: 2,
   });
   return (
-    <Link href={`/products/${product.id}`} passHref>
+    <Link href={`/store/products/${product.id}`} passHref>
     <div 
       key={product.id} 
-      className="bg-white w-[220px] mx-2 h-[450px] flex flex-col justify-between relative shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
+      className="bg-white mx-2  xs:w-[150px] xs:h-[350px] sm:w-[200px] sm:h-[385px] md:w-[180px] md:h-[370px]   lg:w-[200px] lg:h-[370px]  xl:w-[220px] xl:h-[450px] flex flex-col justify-between relative shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
     >
       <div className="relative">
         {/* Cartel de Envío Gratis */}
@@ -43,25 +43,25 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           height={200}
           width={200}
-          className="w-full h-52 object-cover transition-opacity duration-300"
+          className="w-full sm:h-48   md:h-44 lg:h-48 xl:h-52 xs:h-36 object-cover transition-opacity duration-300"
           onMouseEnter={() => setHoveredImages((prev) => ({ ...prev, [product.id]: secondImage }))}
           onMouseLeave={() => setHoveredImages((prev) => ({ ...prev, [product.id]: firstImage }))}
         />
       </div>
 
        {/* Información de producto */}
-       <div className="p-4 flex flex-col justify-end flex-grow text-sm font-sans">
-        <h3 className="  h-20 text-gray-600 font-medium">{product.name}</h3>
-        <h3 className="mt-2 text-gray-500 text-xs">{product.title}</h3>
+       <div className="xl:p-4 xs:p-1 flex flex-col justify-start flex-grow text-sm font-sans text-gray-500">
+        <h3 className=" xl:mt-2  xs:text-md sm:text-base sm:leading-none  xl:text-lg xl:leading-none xs:leading-none xs:h-16 sm:h-16 lg:h-12 xl:h-20">{product.name}</h3>
+       
         {product.old_price? (
-        <p className="text-gray-500 line-through text-sm">${product.old_price}</p>
-        ) : <p className=" h-6"></p> }
+        <p className=" line-through  h-6 text-lg">${product.old_price}</p>
+        ) : <p   className=" h-6"></p> }
         <p className=" font-semibold text-lg">{formattedPrice}</p> {/* Mostrar precio formateado */}
-        <p className="text-gray-500 text-sm">{formattedPrecioEnEfectivo} con efectivo o transferencia.</p>
+        <p className=" text-sm xs:leading-none">{formattedPrecioEnEfectivo} con efectivo o transferencia.</p>
         <button className="mt-1 bg-black text-white px-4 py-2 hover:bg-zinc-600 transition-colors duration-300 w-full">
           Comprar
         </button>
-      </div>
+        </div>
     </div>
     </Link>
   );

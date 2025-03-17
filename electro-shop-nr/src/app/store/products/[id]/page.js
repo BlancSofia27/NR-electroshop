@@ -1,5 +1,6 @@
-import ProductDetail from "../../../components/ProductDetail";
-import { getProductById } from "../../server/api";
+import RelatedProducts from "../../../../components/RelatedProducts";
+import ProductDetail from "../../../../components/ProductDetail";
+import { getProductById } from "../../../server/api";
 
 // Esta página recibe los parámetros de la URL
 export default async function ProductDetailPage({ params }) {
@@ -23,6 +24,7 @@ export default async function ProductDetailPage({ params }) {
     <div>
       {/* Pasa el producto completo a ProductDetail */}
       <ProductDetail product={product} />
+      <RelatedProducts category={product.category} />
     </div>
   );
 }

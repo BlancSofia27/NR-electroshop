@@ -28,10 +28,10 @@ const Features = () => {
   ];
 
   return (
-    <div className="container mx-auto py-12 flex justify-center">
+    <div className="container mx-auto xl:py-12 xs:py-4 md:py-6 px-3 flex justify-center text-zinc-700 xs:flex-col ">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {features.map(({ icon, title, subtitle }, index) => (
-          <div key={index} className="flex items-center justify-center gap-3">
+          <div key={index} className="flex items-center xl:justify-center  gap-3">
             {icon}
             <div className="text-start">
               <h3 className="font-bold text-lg">{title}</h3>

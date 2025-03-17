@@ -7,33 +7,19 @@ const dataFooter = [
   {
     id: 1,
     name: "Productos",
-    link: "/productos",
+    link: "/store/products",
   },
   {
     id: 2,
-    name: "Luces",
-    link: "/productos/luces",
-  },
-  {
-    id: 3,
-    name: "Cargadores",
-    link: "/productos/cargadores",
-  },
-  {
-    id: 4,
-    name: "Audio",
-    link: "/productos/audio",
-  },
-  {
-    id: 5,
-    name: "Entretenimiento",
-    link: "/productos/entretenimiento",
-  },
+    name: "Categorias",
+    link: "/store/categories",
+  }
+ 
 ];
 
 const Footer = () => {
   return (
-    <footer className="mx-11">
+    <footer className="mx-11 text-lg">
       <div className="w-full max-w-screen-xl mx-auto text-gray-700">
         <div className="flex flex-col sm:flex-row sm:justify-between">
           {/* Logo */}

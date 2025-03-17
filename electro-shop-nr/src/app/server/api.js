@@ -9,18 +9,28 @@ const TABLE_NAME = "products";
 const BUCKET_NAME = "products-images";
 
 // Obtener todos los productos
-export const getProducts = async (category = null, sortBy = "price") => {
+export const getProducts = async (category = null, sortOrder = "asc", minPrice = 0, maxPrice = Infinity) => {
   try {
-    let query = supabase.from(TABLE_NAME).select("*");
+    const MAX_PRICE_LIMIT = 1000000; // Definir un límite alto para el precio
+    const priceLimit = maxPrice === Infinity ? MAX_PRICE_LIMIT : maxPrice;
 
-    if (category) {
-      query = query.eq("category", category); // Filtrar por categoría si se proporciona
+    let query = supabase.from("products").select("*");
+
+    // Filtrar por categoría
+    if (category) query = query.eq("category", category);
+
+    // Filtrar por precio mínimo y máximo
+    if (typeof minPrice === "number" && !isNaN(minPrice)) {
+      query = query.gte("price", minPrice);
+    }
+    if (typeof priceLimit === "number" && !isNaN(priceLimit)) {
+      query = query.lte("price", priceLimit);
     }
 
-    if (sortBy) {
-      query = query.order(sortBy, { ascending: true }); // Ordenar según el criterio
-    }
+    // Ordenar por precio
+    query = query.order("price", { ascending: sortOrder === "asc" });
 
+    // Ejecutar la consulta
     const { data, error } = await query;
     if (error) throw error;
 
@@ -30,6 +40,11 @@ export const getProducts = async (category = null, sortBy = "price") => {
     return [];
   }
 };
+
+
+
+
+
 
 
 // Obtener producto por ID
@@ -149,6 +164,9 @@ export const deleteProduct = async (id, images) => {
   }
 };
 
+
+
+
 export const SweetAlert = (title, text, icon) => {
   Swal.fire({
     title: title,
@@ -157,6 +175,27 @@ export const SweetAlert = (title, text, icon) => {
     confirmButtonText: "OK",
   });
 };
+
+
+export const getRandomProductsByCategory = async (category) => {
+  try {
+    let { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("category", category); // Filtrar por categoría
+
+    if (error) throw error;
+
+    // Barajar aleatoriamente los productos y tomar hasta 5
+    const shuffledProducts = data.sort(() => Math.random() - 0.5).slice(0, 5);
+
+    return shuffledProducts;
+  } catch (error) {
+    console.error("Error al obtener productos aleatorios:", error);
+    return [];
+  }
+};
+
 
 
 

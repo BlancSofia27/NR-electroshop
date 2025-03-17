@@ -18,8 +18,8 @@ const ProductList = () => {
     fetchProducts();
   }, []);
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="container mx-auto py-8 xl:px-4 md:px-2 xs:px-0">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {products.map((product) => (
           <div key={product.id} className="flex justify-center">
             <ProductCard product={product} className="w-full max-w-[250px] h-full" />

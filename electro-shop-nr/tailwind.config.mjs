@@ -14,6 +14,9 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"], // Esto hace que `font-sans` use `Inter`
       },
+      screens:{
+        xs:'300px',
+      }
     },
   },
   plugins: [],

@@ -14,7 +14,7 @@ const messages = [
 const CarouselText = () => {
   return (
     <div className="w-full h-auto bg-verde overflow-hidden relative flex bg-zinc-900">
-      <div className="animate-marquee flex whitespace-nowrap text-white py-3 gap-5 text-2xl">
+      <div className="animate-marquee flex whitespace-nowrap text-white py-3 gap-5 xl:text-2xl md:text-2xl">
         {/* 🔹 Duplicamos el texto para el efecto infinito */}
         {[...messages, ...messages].map((message, index) => (
           <span key={index} className="px-8">{message}</span>
