@@ -7,12 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { addToCart } from "../redux/cartSlice";
 import BuyNowButton from "./BuyNowButton";
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Loader from "./Loader";
+
 const ProductDetail = ({ product }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
   if (!product) {
     return <div>Error: Producto no encontrado</div>;
   }
 
-  const dispatch = useDispatch();
   const { id, name, price, old_price, images, description } = product;
 
   const precioEnEfectivo = price - price * 0.1;
@@ -41,13 +46,22 @@ const ProductDetail = ({ product }) => {
 
   const handleThumbnailClick = (image) => {
     setSelectedImage(image);
+    setIsLoading(true);
   };
 
-  const formattedDescription = description.split("-").map((part, index) => (
-    <p key={index} className="text-gray-600 text-lg my-2">{part.trim()}</p>
-  ));
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
-  // Función para agregar al carrito con Toastify
+  const formattedDescription = description
+    .split("-")
+    .map((part, index) => (
+      <p key={index} className="text-gray-600 text-lg my-2">
+        {part.trim()}
+      </p>
+    ));
+
+  // Agregar al carrito con Toastify
   const handleAddToCart = () => {
     const item = { id, name, price, old_price, images, description, selectedImage };
     dispatch(addToCart(item));
@@ -73,8 +87,8 @@ const ProductDetail = ({ product }) => {
         draggable: true,
         theme: "dark",
         style: {
-          backgroundColor: "#1E1E1E", // Fondo oscuro personalizado
-          color: "#ffffff", // Texto blanco
+          backgroundColor: "#1E1E1E",
+          color: "#ffffff",
           borderRadius: "10px",
           padding: "10px",
         },
@@ -86,37 +100,78 @@ const ProductDetail = ({ product }) => {
   return (
     <>
       <ToastContainer />
-      <div className="container xs:mt-[130px] mx-auto xl:px-8 xl:py-6 lg:px-8 lg:py-6 flex flex-col gap-6 items-center justify-center">
-        <div className="container mx-auto xl:px-8 xl:py-6 lg:px-8 lg:py-6 flex flex-col lg:flex-row gap-6 items-center justify-center">
-          {/* Galería de imágenes */}
-          <div className="w-full lg:w-2/5 flex justify-center">
-            {/* Carrusel para pantallas pequeñas y medianas */}
+      <div className="container xs:mt-[130px] mx-auto flex flex-col gap-6 items-center justify-center">
+        <div className="container mx-auto flex flex-col md:flex-row gap-6 items-center justify-center">
+          {/* Galería de imágenes en md, lg, xl */}
+          <div className="hidden md:flex w-full lg:w-2/5 flex-col lg:flex-row items-center">
+            {/* Miniaturas */}
+            <div className="hidden lg:flex flex-col gap-2 w-1/5 m-4">
+              {images?.map((img, index) => (
+                <button
+                  key={index}
+                  className="rounded-lg focus:outline-none transform transition-transform duration-200 hover:scale-105"
+                  onClick={() => handleThumbnailClick(img)}
+                >
+                  <Image
+                    src={img}
+                    alt={`Imagen ${index + 1}`}
+                    className="object-cover rounded-md"
+                    width={100}
+                    height={100}
+                  />
+                </button>
+              ))}
+            </div>
+
+            {/* Imagen principal */}
+            <div className="w-full lg:w-4/5 relative">
+              {isLoading && (
+                <div className="absolute inset-0 flex justify-center items-center bg-white">
+                  <Loader />
+                </div>
+              )}
+              <Image
+                src={selectedImage}
+                alt={name}
+                className="object-cover rounded-lg"
+                width={400}
+                height={400}
+                onLoad={handleImageLoad}
+              />
+            </div>
+            
+          </div>
+          
+          {/* Carrusel en xs y sm */}
+          <div className="md:hidden">
             <Carousel
               showArrows={true}
               autoPlay={false}
               infiniteLoop={true}
               swipeable={true}
               dynamicHeight={true}
-              showThumbs={false} // Escondido en pantallas grandes
-              className="lg:hidden" // Escondido en pantallas grandes
+              showThumbs={false}
+              height="330px"
             >
               {images?.map((img, index) => (
                 <div key={index}>
-                  <img src={img} alt={`Imagen ${index + 1}`} />
+                  {isLoading && (
+                    <div className="absolute inset-0 flex justify-center items-center bg-white">
+                      <Loader />
+                    </div>
+                  )}
+                  <Image 
+                    src={img} 
+                    alt={`Imagen ${index + 1}`} 
+                    width={330} 
+                    height={330} 
+                    onLoad={handleImageLoad} 
+                  />
                 </div>
               ))}
             </Carousel>
-
-            {/* Imagen principal para pantallas grandes */}
-            <div className="hidden lg:block">
-              <img
-                src={images?.[0] || "/default-image.jpg"}
-                alt={name}
-                className="w-full h-auto object-cover rounded-lg"
-              />
-            </div>
           </div>
-
+          
           {/* Información del producto */}
           <div className="w-full lg:w-2/5 flex flex-col gap-4">
             <h1 className="text-2xl font-semibold text-gray-800">{name}</h1>
@@ -129,9 +184,13 @@ const ProductDetail = ({ product }) => {
 
             <div className="flex flex-col items-start">
               {old_price && (
-                <p className="text-gray-500 line-through text-lg">{formattedOldPrice}</p>
+                <p className="text-gray-500 line-through text-lg">
+                  {formattedOldPrice}
+                </p>
               )}
-              <p className="text-3xl font-bold text-zinc-900">{formattedPrice}</p>
+              <p className="text-3xl font-bold text-zinc-900">
+                {formattedPrice}
+              </p>
               <p className="text-gray-500 text-lg">
                 {formattedPrecioEnEfectivo} con efectivo o transferencia.
               </p>

@@ -31,14 +31,14 @@ const HeaderCarousel = () => {
         "/videos/mobileHeader3.mp4",
         "/videos/mobileHeader4.mp4",
       ]);
-      setVideoHeight("h-[400px]");
+      setVideoHeight("h-[400px] ");
     }
   }, []);
 
   if (!isClient) return null; // Evita renderizado en SSR
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto">
+    <div className=" max-w-screen-xl mx-auto">
       <Carousel
         autoPlay
         interval={3000}
@@ -47,14 +47,14 @@ const HeaderCarousel = () => {
         showStatus={false}
       >
         {videoSources.map((src, index) => (
-          <div key={index} className={`relative w-full ${videoHeight}`}>
+          <div key={index} className={`relative xl:w-full lg:w-full xs:w-[350px] ${videoHeight}`}>
             <video
               src={src}
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="w-full h-full  object-cover"
             />
           </div>
         ))}
