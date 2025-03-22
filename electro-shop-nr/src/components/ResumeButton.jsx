@@ -33,7 +33,7 @@ const ResumeButton = () => {
   return (
     <div className="flex justify-center">
       <a
-        href={whatsappLink}
+        href="/store/checkout"
         target="_blank"
         rel="noopener noreferrer"
         className=" mx-2 bg-black text-white font-semibold py-3 px-6 hover:bg-zinc-700 transition"

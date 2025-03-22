@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getProductById } from "../app/server/api"; // Asume que esta función existe
 import ResumeButton from "./ResumeButton";
 
+
 const Cart = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
