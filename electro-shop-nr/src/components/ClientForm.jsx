@@ -59,6 +59,7 @@ export default function ClientForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4 pt-12 text-zinc-800">
+      <h1>Datos del Cliente</h1>
       <div className="grid gap-2 sm:grid-cols-2">
         <input
           name="name"
