@@ -9,7 +9,8 @@ const TABLE_NAME = "products";
 const BUCKET_NAME = "products-images";
 
 // Obtener todos los productos
-export const getProducts = async (category = null, sortOrder = "asc", minPrice = 0, maxPrice = Infinity,searchTerm = "") => {
+export const getProducts = async (category = null, sortOrder = "asc", minPrice = 0, maxPrice = Infinity,
+  searchTerm = "") => {
   try {
     const MAX_PRICE_LIMIT = 1000000; // Definir un límite alto para el precio
     const priceLimit = maxPrice === Infinity ? MAX_PRICE_LIMIT : maxPrice;
@@ -79,6 +80,7 @@ export const createProduct = async (product, files) => {
     for (const file of files) {
       const fileName = `${Date.now()}_${file.name}`;
       const { data, error } = await supabase.storage.from(BUCKET_NAME).upload(fileName, file);
+      
 
       if (error) throw new Error(`Error al subir la imagen: ${error.message}`);
 
@@ -98,6 +100,7 @@ export const createProduct = async (product, files) => {
       name: product.name,
       description: product.description,
       price: product.price,
+      may_price: product.may_price,
       old_price: product.old_price ? product.old_price : null, 
       free_shipping: product.free_shipping,
       stock: product.stock,
@@ -161,7 +164,7 @@ export const deleteProduct = async (id, images) => {
     const { error } = await supabase.from(TABLE_NAME).delete().eq("id", id);
     if (error) throw error;
 
-    SweetAlertOptions("¿Eliminar este producto?", "Eliminar", "Volver atras", "Producto eliminado correctamente","sucess", "Producto no eliminado","sucess");
+    
   } catch (error) {
     console.error("Error al eliminar producto:", error);
     SweetAlertError("Ocurrio un Error, pero no te preocupes", error.message, "Enviaselo a el soporte tecnico");

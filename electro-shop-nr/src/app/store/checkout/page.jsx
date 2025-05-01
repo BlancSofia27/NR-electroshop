@@ -1,4 +1,5 @@
 import ClientForm from "../../../components/ClientForm";
+export const dynamic = "force-dynamic";
 
 
 const Checkout = () => {

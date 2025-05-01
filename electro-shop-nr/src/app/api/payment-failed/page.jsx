@@ -1,19 +1,12 @@
 // pages/api/payment-failed.js
 "use client";
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+
+
 
 export default function PaymentFailed() {
-  const router = useRouter();
 
-  useEffect(() => {
-    // Aquí puedes proporcionar un enlace para volver a intentar el pago, por ejemplo.
-    const timer = setTimeout(() => {
-      router.push('/'); // Redirige a la página principal o a una página personalizada
-    }, 5000); // Redirige después de 5 segundos
 
-    return () => clearTimeout(timer);
-  }, [router]);
+ 
 
   return (
     <div className="flex justify-center items-center h-screen bg-red-100">

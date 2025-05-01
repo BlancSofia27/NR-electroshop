@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import ProductFormModal from "./EditProductModal";
-import { deleteProduct } from "@/app/server/api";
+import { deleteProduct, SweetAlertOptions } from "@/app/server/api";
 
 
 const ProductCardAdmin = ({ product }) => {
@@ -19,6 +19,13 @@ const ProductCardAdmin = ({ product }) => {
     maximumFractionDigits: 2,
   });
 
+  const formattedMayPrice = product.may_price.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
   const precioEnEfectivo = product.price - (product.price * 0.10);
   const formattedPrecioEnEfectivo = precioEnEfectivo.toLocaleString("es-AR", {
     style: "currency",
@@ -29,6 +36,7 @@ const ProductCardAdmin = ({ product }) => {
 
   const handleDelete = (product) => () => {
       deleteProduct(product.id, product.images)
+      SweetAlertOptions("¿Eliminar este producto?", "Eliminar", "Volver atras", "Producto eliminado correctamente","sucess", "Producto no eliminado","sucess");
   }
 
   
@@ -62,16 +70,19 @@ const ProductCardAdmin = ({ product }) => {
       </div>
 
       {/* Información del producto */}
-      <div className="xl:p-4 xs:p-1 flex flex-col justify-start flex-grow text-sm font-sans text-gray-500">
+      <div className="xl:px-4 xs:px-1 flex flex-col justify-between flex-grow text-sm font-sans text-gray-500">
         <h3 className="xl:mt-2 xs:text-md sm:text-base sm:leading-none xl:text-lg xl:leading-none xs:leading-none xs:h-16 sm:h-16 lg:h-12 xl:h-20">{product.name}</h3>
+        <div className="flex flex-col py-2 ">
         {product.old_price && (
           <p className="line-through h-6 text-lg">${product.old_price}</p>
         )}
         <p className="font-semibold text-lg">{formattedPrice}</p>
         <p className="text-sm xs:leading-none">{formattedPrecioEnEfectivo} con efectivo o transferencia.</p>
+        <p className="text-sm xs:leading-none">Precio mayorista:{formattedMayPrice} </p>
         <button onClick={() => setIsModalOpen(true)} className="mt-1 bg-black text-white px-4 py-2 hover:bg-zinc-600 transition-colors duration-300 w-full">
           Editar
         </button>
+        </div>
       </div>
 
       {/* Modal de edición */}

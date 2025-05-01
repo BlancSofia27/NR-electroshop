@@ -1,7 +1,9 @@
 import React from "react";
 
 const BuyNowButton = () => {
- 
+  // Obtener la URL actual de la página
+  const currentUrl = window.location.href;
+
   // Número de WhatsApp al que enviar el mensaje
   const whatsappNumber = "541127484410"; // Reemplaza con el número de WhatsApp deseado
 

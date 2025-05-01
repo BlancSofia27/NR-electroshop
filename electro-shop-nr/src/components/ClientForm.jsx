@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setClientData } from '../redux/clientDataSlice'; // Importar la acción de Redux
 import { useRouter } from 'next/navigation';
 
+
 export default function ClientForm() {
   const dispatch = useDispatch();
   const router = useRouter();

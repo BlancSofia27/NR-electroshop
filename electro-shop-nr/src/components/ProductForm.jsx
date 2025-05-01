@@ -8,8 +8,9 @@ const ProductForm = () => {
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    price: 0,
-    old_price: 0,
+    price: null,
+    may_price:null,
+    old_price: null,
     stock: "",
     category: "",
     free_shipping: false,
@@ -58,7 +59,7 @@ const ProductForm = () => {
       const result = await createProduct(product, product.images);
       if (result) {
           setProduct({ 
-          name: "", description: "", price: "", old_price: "", 
+          name: "", description: "", price: "", may_price: "", old_price: "", 
           stock: "", category: "", free_shipping: false, images: [] 
         });
       }
@@ -70,7 +71,7 @@ const ProductForm = () => {
   };
 
   return (
-    <div className="h-full  text-white  bg-zinc-900 mx-auto  shadow-lg  p-6  ">
+    <div className="  text-white  bg-zinc-900 mx-auto  shadow-lg  xl:px-20 lg:px-20 xs:p-5 ">
       <h2 className="text-2xl font-semibold  mb-4 ml-14">Publicar Producto</h2>
       {isLoading ? (
        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
@@ -109,6 +110,18 @@ const ProductForm = () => {
           className="w-full p-2 border rounded-lg" 
           required 
         />
+
+<input 
+          type="number" 
+          name="may_price" 
+          value={product.may_price} 
+          onChange={handleChange} 
+          placeholder="Precio por Mayor" 
+          className="w-full p-2 border rounded-lg" 
+          required 
+        />
+
+
         <input 
           type="number" 
           name="old_price" 
@@ -189,7 +202,7 @@ const ProductForm = () => {
           required 
         />
 
-        <button type="submit" className="w-full bg-black text-white p-2 rounded-lg">Publicar</button>
+        <button type="submit" className="w-full bg-black text-white p-2  rounded-lg">Publicar</button>
       </form>)}
     </div>
   );
