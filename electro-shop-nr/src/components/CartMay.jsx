@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, clearCart, updateQuantity } from "../redux/cartSlice";
+import { removeFromCart, clearCart, updateQuantity } from "../redux/cartMaySlice";
 import { X, Plus, Minus } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getProductById } from "../app/server/api"; // Asume que esta función existe
-import ResumeButton from "./ResumeButton";
+import ResumeButtonMay from "./ResumeButtonMay";
 
 
-const Cart = ({ isOpen, onClose }) => {
-  const cartItems = useSelector((state) => state.cart.items);
+const CartMay = ({ isOpen, onClose }) => {
+  const cartItems = useSelector((state) => state.cartMay.items);
   const dispatch = useDispatch();
   const [productDetails, setProductDetails] = useState({});
   const [error, setError] = useState(null);
@@ -88,7 +88,7 @@ const Cart = ({ isOpen, onClose }) => {
                     />
                     <div className="flex-1 ml-3">
                       <p className="text-sm font-medium">{productDetails[item.id].name}</p>
-                      <p className="text-xs text-gray-500">${productDetails[item.id].price}</p>
+                      <p className="text-xs text-gray-500">${productDetails[item.id].may_price}</p>
                     </div>
                   </>
                 )}
@@ -122,7 +122,7 @@ const Cart = ({ isOpen, onClose }) => {
             >
               Vaciar carrito
             </button>
-            <ResumeButton />
+            <ResumeButtonMay />
           </div>
         )}
       </div>
@@ -130,4 +130,4 @@ const Cart = ({ isOpen, onClose }) => {
   );
 };
 
-export default Cart;
+export default CartMay;

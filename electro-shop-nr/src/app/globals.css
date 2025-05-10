@@ -25,7 +25,10 @@ body {
   @apply font-sans text-[12px] leading-[16px] tracking-normal;
   color: var(--foreground);
   background: var(--background);
+  
 }
+
+
 
 
 

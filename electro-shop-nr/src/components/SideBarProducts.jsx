@@ -7,11 +7,11 @@ const SideBarProducts = ({ selectedCategory, setCategory, setSortOrder, setPrice
   const [localMaxPrice, setLocalMaxPrice] = useState(1000000);
 
   return (
-    <div className=" text-zinc-800 w-64 p-4 m-auto bg-white   h-full  overflow-y-auto">
+    <div className=" text-zinc-800 w-64  bg-white mx-auto  h-full  overflow-y-auto">
       {/* Selector de categorías */}
       <h3 className="text-lg font-semibold mb-2">Categoría</h3>
       <select
-        className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+        className="flex w-full p-2 border border-gray-300 rounded-lg mb-4 justify-center items-center"
         value={selectedCategory || "Todas"}
         onChange={(e) => setCategory(e.target.value === "Todas" ? "" : e.target.value)}
       >

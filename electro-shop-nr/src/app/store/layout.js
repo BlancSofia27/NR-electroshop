@@ -9,12 +9,12 @@ import Navbar from "../../components/Navbar";
 
 export default function StoreLayout({ children }) {
   return (
-    <>
+    <div className="xl:mt-[100px] xs:mt-16 lg:mt-[100px] sm:mt-[100px]">
      <Navbar />
      <Suspense fallback={<div>Loading...</div>}>
       {children}
      </Suspense>
       <Footer/>
-    </>
+    </div>
   );
 }

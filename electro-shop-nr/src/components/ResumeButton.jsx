@@ -5,6 +5,7 @@ const ResumeButton = () => {
   const cartItems = useSelector((state) => state.cart.items);
 
   // Función para generar el mensaje para WhatsApp
+  console.log(cartItems);
   const generateWhatsAppMessage = () => {
     if (cartItems.length === 0) {
       return "El carrito está vacío.";
@@ -32,10 +33,18 @@ const ResumeButton = () => {
 
   return (
     <div className="flex justify-center">
-      <a
+      {/* <a
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
+        className=" mx-2 bg-black text-white font-semibold py-3 px-6 hover:bg-zinc-700 transition"
+      >
+       Finalizar Compra
+      </a> */}
+      <a
+        href='/store/checkout'
+        target="_blank"
+        // rel="noopener noreferrer"
         className=" mx-2 bg-black text-white font-semibold py-3 px-6 hover:bg-zinc-700 transition"
       >
        Finalizar Compra
