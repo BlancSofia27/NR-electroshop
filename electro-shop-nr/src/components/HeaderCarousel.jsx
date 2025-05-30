@@ -38,7 +38,7 @@ const HeaderCarousel = () => {
   if (!isClient) return null; // Evita renderizado en SSR
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto">
+    <div className="w-full max-w-screen-xl mx-auto mt-28">
       <Carousel
         autoPlay
         interval={3000}

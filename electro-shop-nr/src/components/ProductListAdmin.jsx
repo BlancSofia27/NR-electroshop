@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import ProductCardAdmin from "./ProductCardAdmin";
 import { getProducts } from "../app/server/api";
 import Loader from "./Loader";
+import { useSearchParams } from "next/navigation";
 
 const ProductListAdmin = () => {
-  // const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   // const pathname = usePathname();
   // const router = useRouter();
 

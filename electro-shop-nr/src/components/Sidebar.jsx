@@ -10,10 +10,10 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className="flex py-3 bg-zinc-900">
+    <div className="flex py-3">
       {/* Botón para abrir/cerrar el sidebar */}
       <button
-        className="fixed top-3 left-4 z-50 p-2 text-white rounded-full"
+        className="fixed top-3 left-4 z-50 p-2 text-blue-800 rounded-full"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FiX className="w-6 h-6 ml-48" /> : <FiMenu className="w-6 h-6" />}

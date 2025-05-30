@@ -115,7 +115,7 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <input type="text" name="name" value={product.name} onChange={(e) => setProduct({ ...product, name: e.target.value })} placeholder="Nombre del producto" className="w-full p-2 border rounded-lg" maxLength={47} required />
-            <textarea name="description" value={product.description} onChange={(e) => setProduct({ ...product, description: e.target.value })} placeholder="Descripción" className="w-full p-2 border rounded-lg" required />
+            <textarea name="description" value={product.description} onChange={(e) => setProduct({ ...product, description: e.target.value })} placeholder="Descripción" className="w-full h-40 p-2 border rounded-lg" required />
             <input type="number" name="price" value={product.price} onChange={(e) => setProduct({ ...product, price: e.target.value })} placeholder="Precio actual" className="w-full p-2 border rounded-lg" required />
             <select name="category" value={product.category} onChange={(e) => setProduct({ ...product, category: e.target.value })} className="p-2 border rounded-lg text-gray-500 w-full" required>
               <option value="">Seleccionar Categoría</option>
