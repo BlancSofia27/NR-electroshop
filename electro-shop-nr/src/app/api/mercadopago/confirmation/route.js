@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { Payment } from "mercadopago";
 import { revalidatePath } from "next/cache";
 import apiMP, { mercadopago } from "../../../../api-mercado-pago";

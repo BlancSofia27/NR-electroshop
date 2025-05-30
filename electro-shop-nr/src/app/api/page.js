@@ -8,7 +8,7 @@ export default async function MarketplacePage({searchParams}) {
   const dataClient = {name,document,products,cp,street,heigth_street,floor_departament,number_departament,email,phone}
   const user = await apiMP.user.fetch(); // Obtener datos del user
   
-  console.log(user)
+  console.log("usuario: ",user)
     // Obtenemos la URL de autorización
     const authorizationUrl = await apiMP.user.authorize();
     console.log("data en page",dataClient);
@@ -24,7 +24,7 @@ export default async function MarketplacePage({searchParams}) {
     <section className="max-w-4xl mx-auto p-6 bg-white text-zinc-800 shadow-md rounded-lg space-y-8 ">
       <h1 className="text-3xl font-semibold text-center ">Marketplace</h1>
 
-      {user? (
+      {user.marketplace? (
         <div>
           <div className="text-center">
             <button

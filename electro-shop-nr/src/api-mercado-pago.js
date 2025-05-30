@@ -14,22 +14,26 @@ const apiMP = {
     async fetch() {
       // Obtenemos los datos de la tabla 'admin' desde Supabase
       const { data, error } = await supabase
-        .from('admin')
+        .from('split')
         .select('*')
-        .single(); // Asegura que solo devuelvas un objeto
+        .single();  // Asegura que solo devuelvas un objeto
     
       if (error) {
         throw new Error(`Error al obtener los datos del admin: ${error.message}`);
       }
-    
+      console.log("data:",data)
+      console.log("marketplace:",data.marketplace)
+      console.log("Hora del fetch:", new Date().toISOString());
+
       // Devolvemos los datos del usuario
-      return data.marketplace ? data : null
+      return data
+
     },
     
     async update(data) {
       // Actualizamos los datos en Supabase
       const { error } = await supabase
-      .from('admin')
+      .from('split')
       .update(data)  // Actualiza la fila existente con los datos proporcionados
       .eq('id', 1);  // Filtra para asegurar que actualizas la fila correcta (en este caso, la fila con id 1)
   
