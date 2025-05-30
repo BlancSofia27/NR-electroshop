@@ -9,6 +9,7 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
     name: "",
     description: "",
     price: "",
+    may_price: "",
     old_price: "",
     stock: "",
     category: "",
@@ -19,14 +20,8 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
   useEffect(() => {
     if (productToEdit) {
       setProduct({
-        name: productToEdit.name || "",
-        description: productToEdit.description || "",
-        price: productToEdit.price || "",
-        old_price: productToEdit.old_price || "",
-        stock: productToEdit.stock || "",
-        category: productToEdit.category || "",
-        free_shipping: productToEdit.free_shipping || false,
-        images: productToEdit.images || [],
+        ...productToEdit,
+        images: productToEdit.images ? [...productToEdit.images] : [], // Mantiene URLs existentes
       });
     }
   }, [productToEdit]);
@@ -37,6 +32,7 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
   // Función para manejar la carga de imágenes
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
+
     if (product.images.length + files.length > 5) {
       alert("Solo puedes subir hasta 5 imágenes.");
       return;
@@ -54,14 +50,12 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
     });
   };
 
-  // Convierte las URLs de imágenes en archivos Blob antes de enviarlas a createProduct
+  // Convierte solo las imágenes nuevas a archivos Blob
   const convertUrlsToFiles = async () => {
     const convertedImages = await Promise.all(
       product.images.map(async (img) => {
         if (typeof img === "string") {
-          const response = await fetch(img);
-          const blob = await response.blob();
-          return new File([blob], "image.jpg", { type: blob.type });
+          return img; // Mantiene URLs existentes sin modificar
         }
         return img;
       })
@@ -84,13 +78,18 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
         name: "",
         description: "",
         price: "",
+        may_price: "",
         old_price: "",
         stock: "",
         category: "",
         free_shipping: false,
         images: [],
       });
-      await deleteProduct(productToEdit.id, productToEdit.images);
+
+      if (productToEdit) {
+        await deleteProduct(productToEdit.id, productToEdit.images);
+      }
+
       onClose();
     } catch (error) {
       alert("Error al crear producto");
@@ -116,11 +115,15 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <input type="text" name="name" value={product.name} onChange={(e) => setProduct({ ...product, name: e.target.value })} placeholder="Nombre del producto" className="w-full p-2 border rounded-lg" maxLength={47} required />
             <textarea name="description" value={product.description} onChange={(e) => setProduct({ ...product, description: e.target.value })} placeholder="Descripción" className="w-full h-40 p-2 border rounded-lg" required />
-            <input type="number" name="price" value={product.price} onChange={(e) => setProduct({ ...product, price: e.target.value })} placeholder="Precio actual" className="w-full p-2 border rounded-lg" required />
+            <input type="number" name="price" value={product.price} onChange={(e) => setProduct({ ...product, price: e.target.value })} placeholder="Precio Minorista" className="w-full p-2 border rounded-lg" required />
+            <input type="number" name="may_price" value={product.may_price} onChange={(e) => setProduct({ ...product, may_price: e.target.value })} placeholder="Precio Mayorista" className="w-full p-2 border rounded-lg" required />
+            <input type="number" name="old_price" value={product.old_price} onChange={(e) => setProduct({ ...product, old_price: e.target.value })} placeholder="Precio Anterior / Tachado (Opcional)" className="w-full p-2 border rounded-lg" />
+
             <select name="category" value={product.category} onChange={(e) => setProduct({ ...product, category: e.target.value })} className="p-2 border rounded-lg text-gray-500 w-full" required>
               <option value="">Seleccionar Categoría</option>
               {categoriesArray.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
             </select>
+
             <div className="flex items-center">
               <label className="mr-3">Envío Gratis</label>
               <input type="checkbox" checked={product.free_shipping} onChange={() => setProduct({ ...product, free_shipping: !product.free_shipping })} className="cursor-pointer" />
@@ -129,7 +132,7 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
             {/* Drag & Drop de Imágenes */}
             <ReactSortable list={product.images} setList={(newImages) => setProduct({ ...product, images: newImages })} className="flex flex-wrap gap-2">
               {product.images.map((image, index) => {
-                const imageUrl = image instanceof File ? URL.createObjectURL(image) : image;
+                const imageUrl = typeof image === "string" ? image : URL.createObjectURL(image);
                 return (
                   <div key={index} className="relative flex flex-col items-center">
                     <span className="text-xs bg-gray-800 text-white px-2 py-1 rounded-full absolute -top-2 left-1/2 transform -translate-x-1/2">{index + 1}</span>
@@ -139,14 +142,6 @@ const ProductFormModal = ({ isOpen, onClose, productToEdit }) => {
                 );
               })}
             </ReactSortable>
-
-            {/* Input para cargar imágenes */}
-            {product.images.length < 5 && (
-              <div className="flex items-center gap-2">
-                <input type="file" multiple accept="image/*" onChange={handleFileChange} className="w-full p-2 border rounded-lg" />
-                <button type="button" onClick={() => document.querySelector('input[type="file"]').click()} className="bg-green-500 text-white px-3 py-2 rounded-lg">+</button>
-              </div>
-            )}
 
             {/* Botón de publicar */}
             <button type="submit" className="w-full bg-black text-white p-2 rounded-lg">Publicar</button>

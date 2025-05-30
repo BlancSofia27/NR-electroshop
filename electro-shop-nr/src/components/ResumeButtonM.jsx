@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 
 const ResumeButton = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cartM.items);
 
   // Función para generar el mensaje para WhatsApp
   const generateWhatsAppMessage = () => {
@@ -12,14 +12,14 @@ const ResumeButton = () => {
 
     // Generar una lista con los productos y sus cantidades
     const productDetails = cartItems.map((item) => {
-      return `${item.quantity}x ${item.name} - $${item.price * item.quantity}`;
+      return `${item.quantity}x ${item.name} - $${item.may_price * item.quantity}`;
     });
 
     // Crear un mensaje completo para WhatsApp
-    const message = `¡Hola! Quiero hacer un pedido. Aquí están los productos en mi carrito:\n\n${productDetails.join(
+    const message = `¡Hola! Quiero hacer un pedido Mayorista. Aquí están los productos en mi carrito:\n\n${productDetails.join(
       "\n"
     )}\n\nTotal: $${cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) => total + item.may_price * item.quantity,
       0
     )}`;
 

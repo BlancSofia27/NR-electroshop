@@ -98,6 +98,7 @@ export const createProduct = async (product, files) => {
       name: product.name,
       description: product.description,
       price: product.price,
+      may_price: product.may_price,
       old_price: product.old_price ? product.old_price : null, 
       free_shipping: product.free_shipping,
       stock: product.stock,
@@ -161,7 +162,8 @@ export const deleteProduct = async (id, images) => {
     const { error } = await supabase.from(TABLE_NAME).delete().eq("id", id);
     if (error) throw error;
 
-    SweetAlertOptions("¿Eliminar este producto?", "Eliminar", "Volver atras", "Producto eliminado correctamente","sucess", "Producto no eliminado","sucess");
+    SweetAlertOptions("¿Eliminar este producto?", "Eliminar", "Volver atrás", "Producto eliminado", "success", "Producto no eliminado", "error"
+);
   } catch (error) {
     console.error("Error al eliminar producto:", error);
     SweetAlertError("Ocurrio un Error, pero no te preocupes", error.message, "Enviaselo a el soporte tecnico");

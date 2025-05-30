@@ -9,6 +9,7 @@ const ProductForm = () => {
     name: "",
     description: "",
     price: 0,
+    may_price: 0,
     old_price: 0,
     stock: "",
     category: "",
@@ -58,7 +59,7 @@ const ProductForm = () => {
       const result = await createProduct(product, product.images);
       if (result) {
           setProduct({ 
-          name: "", description: "", price: "", old_price: "", 
+          name: "", description: "", price: "", may_price: "", old_price: "", 
           stock: "", category: "", free_shipping: false, images: [] 
         });
       }
@@ -100,6 +101,7 @@ const ProductForm = () => {
           required
         ></textarea>
         
+        <label htmlFor="price" className="block text-sm font-medium text-white">Precio por Menor</label>
         <input 
           type="number" 
           name="price" 
@@ -109,12 +111,23 @@ const ProductForm = () => {
           className="w-full p-2 border rounded-lg" 
           required 
         />
+        <label htmlFor="price" className="block text-sm font-medium text-white">Precio Anterior / Tachado (Opcional)</label>
         <input 
           type="number" 
           name="old_price" 
           value={product.old_price ?? null} 
           onChange={handleChange} 
           placeholder="Precio anterior" 
+          className="w-full p-2 border rounded-lg" 
+        />
+
+        <label htmlFor="price" className="block text-sm font-medium text-white">Precio Mayorista</label>
+        <input 
+          type="number" 
+          name="may_price" 
+          value={product.may_price} 
+          onChange={handleChange} 
+          placeholder="Precio Por Mayor" 
           className="w-full p-2 border rounded-lg" 
         />
 

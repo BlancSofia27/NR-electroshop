@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import Cart from "./Cart";
+import CartM from "./CartMay";
 
-const Navbar = () => {
+const NavbarMay = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -31,11 +31,9 @@ const Navbar = () => {
           {/* Menú de escritorio */}
           <ul className="hidden md:flex space-x-6 text-base">
             <li><Link href="/" className="hover:text-gray-400">Inicio</Link></li>
-            <li><Link href="/store/products" className="hover:text-gray-400">Productos</Link></li>
             <li><Link href="/store/categories" className="hover:text-gray-400">Categorias</Link></li>
-            <li><Link href="/store/products?category=COMBOS&maxPrice=1000000&sortOrder=asc" className="hover:text-gray-400">Combos</Link></li>
+            <li><Link href="/store/products?category=combos&maxPrice=1000000&sortOrder=asc" className="hover:text-gray-400">Combos</Link></li>
             <li><Link href="/store/como-comprar" className="hover:text-gray-400">Cómo Comprar</Link></li>
-            <li><Link href="/mayoristas" className="hover:text-gray-400">Mayoristas</Link></li>
           </ul>
 
           {/* Iconos */}
@@ -61,18 +59,17 @@ const Navbar = () => {
           </div>
           <ul className="flex flex-col items-center ">
           <li><Link href="/" className="hover:text-gray-400">Inicio</Link></li>
-            <li><Link href="/store/products" className="hover:text-gray-400 py-2">Productos</Link></li>
             <li><Link href="/store/categories" className="hover:text-gray-400 py-2">Categorias</Link></li>
-            <li><Link href="/store/products?category=COMBOS&maxPrice=1000000&sortOrder=asc" className="hover:text-gray-400 py-2">Combos</Link></li>
+            <li><Link href="/store/products?category=combos&maxPrice=1000000&sortOrder=asc" className="hover:text-gray-400 py-2">Combos</Link></li>
             <li><Link href="/store/como-comprar" className="hover:text-gray-400 py-2">Cómo Comprar</Link></li>
           </ul>
         </div>
       )}
 
       {/* Sidebar del carrito */}
-      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartM isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 };
 
-export default Navbar;
+export default NavbarMay;

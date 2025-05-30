@@ -32,13 +32,13 @@ const Sidebar = () => {
         <ul className="p-4 space-y-2">
           <li
             className="cursor-pointer p-3 rounded-lg transition-transform duration-200 hover:bg-gray-800 hover:scale-105"
-            onClick={() => router.push("/admin/create")}
+            onClick={() => router.push("/Admin/create")}
           >
             Nuevo Producto
           </li>
           <li
             className="cursor-pointer p-3 rounded-lg transition-transform duration-200 hover:bg-gray-800 hover:scale-105"
-            onClick={() => router.push("/admin/editProduct")}
+            onClick={() => router.push("/Admin/editProduct")}
           >
             Editar Productos
           </li>

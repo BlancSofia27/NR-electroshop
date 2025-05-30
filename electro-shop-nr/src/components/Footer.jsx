@@ -13,8 +13,22 @@ const dataFooter = [
     id: 2,
     name: "Categorias",
     link: "/store/categories",
+  },{
+    id: 3,
+    name: "Combos",
+    link: "/store/products?category=COMBOS&maxPrice=1000000&sortOrder=asc",
+  },
+  {
+    id: 4,
+    name: "Como Comprar",
+    link: "/store/como-comprar",
+  },
+  {
+    id: 5,
+    name: "Mayoristas",
+    link: "/mayoristas",
   }
- 
+   
 ];
 
 const Footer = () => {

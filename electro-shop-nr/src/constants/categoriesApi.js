@@ -7,7 +7,7 @@ import { PiHairDryerFill, PiPlugChargingFill } from "react-icons/pi";
 import { LuTabletSmartphone } from "react-icons/lu";
 import { IoFlashlightSharp, IoGameController, IoPhonePortraitOutline, IoWatch } from "react-icons/io5";
 import { BiSolidHappyAlt } from "react-icons/bi";
-import { TbBottle, TbCategoryPlus } from "react-icons/tb";
+import { TbBottle, TbCategoryPlus, TbPackageExport, TbPackages } from "react-icons/tb";
 import { MdOutlineControlCamera } from "react-icons/md";
 import { LiaFanSolid } from "react-icons/lia";
 
@@ -37,5 +37,6 @@ export const categories = [
   { name: "Soportes", icon: MdOutlineControlCamera },
   { name: "Termos/Botellas", icon: TbBottle },
   { name: "Varios", icon: TbCategoryPlus },
-  { name: "Ventiladores", icon: LiaFanSolid }
+  { name: "Ventiladores", icon: LiaFanSolid },
+  { name: "COMBOS", icon: TbPackages },
 ];
